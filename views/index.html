@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Wikipedia Viewer</title>
+  
+  
+  <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+      <link rel="stylesheet" href="/style.css">
+
+  
+</head>
+
+<body>
+  <div class="container page">
+  <div class="input-group input-group-lg">
+    <span class="input-group-btn">
+        <button id="searchBtn" class="btn btn-primary" type="button" title="Search Wikipedia"><i class="fa fa-search"></i><i class="fa fa-wikipedia-w"></i></button>
+      </span>
+    <input id="searchText" type="text" class="form-control" placeholder="Search Wikipedia for...">
+    <span class="input-group-btn">
+        <a class="btn btn-warning" type="button" href="http://en.wikipedia.org/wiki/Special:Random" target="_blank" title="Random article"><i class="fa fa-random"></i><i class="fa fa-wikipedia-w"></i></a>
+      </span>
+  </div>
+  <!-- /input-group -->
+  <div id="resultsList" class="list-group">
+  </div>
+</div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch-jsonp/1.0.6/fetch-jsonp.min.js"></script>
+
+    <script src="/client.js"></script>
+
+</body>
+</html>
