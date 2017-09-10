@@ -1,7 +1,8 @@
 // client-side js
 
+let langCode = "en";  // default to english
+
 (function() {
-  var langCode = "en";  // default to english
 
   window.fetch('/api/lang').then(function(response) {
     return response.text();
@@ -9,8 +10,8 @@
     langCode = myText;
     
     // change random button url to match the language detected
-    var randomBtn = document.getElementById("randomBtn");
-    var searchText = document.getElementById("searchText");
+    let randomBtn = document.getElementById("randomBtn");
+    let searchText = document.getElementById("searchText");
     randomBtn.href = "http://" + langCode + ".wikipedia.org/wiki/Special:Random"
     // change the search text placeholder text to suit language detected
     if(langCode === "en") {
@@ -64,7 +65,7 @@
 
 function searchWikiFor(query) {
   return new Promise((resolve, reject) => {   
-    fetchJsonp(`//en.wikipedia.org/w/api.php?action=query&format=json&list=search&srsearch=` + query)
+    fetchJsonp(`//` + langCode + `.wikipedia.org/w/api.php?action=query&format=json&list=search&srsearch=` + query)
       .then(response => response.json())
       .then(json => resolve(json.query.search))
       .catch(ex => reject(ex));
@@ -73,7 +74,7 @@ function searchWikiFor(query) {
 
 function getWikiExtracts(titles) {
   return new Promise((resolve, reject) => {
-    fetchJsonp(`//en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&exintro=true&explaintext=true&exlimit=10&titles=` + titles)
+    fetchJsonp(`//` + langCode + `.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&exintro=true&explaintext=true&exlimit=10&titles=` + titles)
       .then(response => response.json())
       .then(json => resolve(json.query.pages))
       .catch(ex => reject(ex));
@@ -81,7 +82,7 @@ function getWikiExtracts(titles) {
 }
 
 function showResults(pages) {
-    let resultsList = document.getElementById("resultsList");
+  let resultsList = document.getElementById("resultsList");
   for(var page in pages) {
     resultsList.insertAdjacentHTML("beforeend", "<a href='https://en.wikipedia.org/?curid=" + pages[page]["pageid"] + "' target='_blank' class='list-group-item'><h4 class='list-group-item-heading'>" + pages[page]["title"] + "</h4><p class='list-group-item-text'>" + firstParagraph(pages[page]["extract"]) + "</p></a>");
   }
